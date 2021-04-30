@@ -1,0 +1,22 @@
+h1{
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 50px;
+}
+
+h2{
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 23px;
+}
+
+p{
+    font-family: 'Orbitron', sans-serif;
+    word-spacing: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.info{
+    text-align: center;
+}

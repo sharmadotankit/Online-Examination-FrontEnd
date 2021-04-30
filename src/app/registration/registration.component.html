@@ -1,0 +1,40 @@
+<div class="formContainer">
+    <form #registrationForm="ngForm" ngSubmit="registerUser(registrationForm)">
+        <label for="fullname">Full Name </label><br>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+        <br>
+
+        <label for="email">Email</label><br>
+        <input type="text" id="email" name="email" required placeholder="Enter your email">
+        <br>
+
+        <label for="mobile">Mobile No</label><br>
+        <input type="text" id="mobile" name="mobile" required placeholder="Enter your Mobile number">
+        <br>
+
+        <label for="dob">Date of Birth </label><br>
+        <input type="date" name="dob" id="dob" required placeholder="Choose your date of Birth">
+        <br>
+
+        <label for="city">City </label><br>
+        <input type="text" name="city" id="city" required placeholder="Enter you city">
+        <br>
+
+        <label for="state">State</label><br>
+        <input type="text" name="state" id="state" required placeholder="Enter you state">
+        <br>
+
+        <label for="qualification">Qualification</label><br>
+        <input list="list-buses" type="text" name="qualification" id="qualification" required
+            placeholder="Enter your qualification">
+        <br>
+
+        <label for="yoc">Year of Completion</label><br>
+        <input type="text" name="yoc" id="yoc" required placeholder="Enter year of completion">
+        <br>
+
+        <button type="submit">Register</button>
+
+
+    </form>
+</div>
