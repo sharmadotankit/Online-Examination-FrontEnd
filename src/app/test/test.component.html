@@ -3,21 +3,22 @@
     <div class="testDiv">
         <h1 id="question"></h1>
 
-        <input type="radio" name="option" id="a">
+        <input type="radio" name="option" id="a" class="answer">
         <label for="a" id="option1"></label><br>
 
-        <input type="radio" name="option" id="b">
-        <label for="a" id="option2"></label><br>
+        <input type="radio" name="option" id="b" class="answer">
+        <label for="b" id="option2"></label><br>
 
-        <input type="radio" name="option" id="c">
-        <label for="a" id="option3"></label><br>
+        <input type="radio" name="option" id="c" class="answer">
+        <label for="c" id="option3"></label><br>
 
-        <input type="radio" name="option" id="d">
-        <label for="a" id="option4"></label><br>
+        <input type="radio" name="option" id="d" class="answer">
+        <label for="d" id="option4"></label><br>
 
+        <hr>
         <div class="buttonDiv">
-            <button (click)="previousQuestion()">Previous</button>
-            <button (click)="nextQuestion()">Next</button>
+            <button (click)="previousQuestion()" id="previousButton">Previous</button>
+            <button (click)="nextQuestion()" id="nextButton">Next</button>
             <br>
             <hr>
             <br>
