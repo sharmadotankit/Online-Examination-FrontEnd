@@ -1,0 +1,27 @@
+<div class="mainContainer">
+    <p id="timer"></p>
+    <div class="testDiv">
+        <h1 id="question"></h1>
+
+        <input type="radio" name="option" id="a">
+        <label for="a" id="option1"></label><br>
+
+        <input type="radio" name="option" id="b">
+        <label for="a" id="option2"></label><br>
+
+        <input type="radio" name="option" id="c">
+        <label for="a" id="option3"></label><br>
+
+        <input type="radio" name="option" id="d">
+        <label for="a" id="option4"></label><br>
+
+        <div class="buttonDiv">
+            <button (click)="previousQuestion()">Previous</button>
+            <button (click)="nextQuestion()">Next</button>
+            <br>
+            <hr>
+            <br>
+            <button (click)="submitTest()">Submit</button>
+        </div>
+    </div>
+</div>

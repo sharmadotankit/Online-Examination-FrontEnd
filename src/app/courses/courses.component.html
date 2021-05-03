@@ -1,0 +1,10 @@
+<div class="allCoursecontainer">
+    <ng-container *ngFor="let course of courses">
+        <div class="courseDiv">
+            <img [src]="course.imagePath" id="course.courseName" alt="course_logo" />
+            <h4>{{course.courseName}}</h4>
+            <button>Enroll</button>
+            <button (click)="goToInstruction()">Take Test</button>
+        </div>
+    </ng-container>
+</div>

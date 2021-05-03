@@ -8,7 +8,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-
+import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CoursesComponent } from './courses/courses.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { InstructionComponent } from './instruction/instruction.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +21,11 @@ import { HomeComponent } from './home/home.component';
     RegistrationComponent,
     AboutUsComponent,
     HomeComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    CoursesComponent,
+    InstructionComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +33,7 @@ import { HomeComponent } from './home/home.component';
     ParticlesModule,
     NgParticlesModule,
     FormsModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
