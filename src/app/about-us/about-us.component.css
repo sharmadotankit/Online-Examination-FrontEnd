@@ -1,7 +1,7 @@
 h1{
     font-family: 'Orbitron', sans-serif;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     text-decoration: underline;
 }
 
@@ -26,6 +26,7 @@ p{
 .aboutUsContainer{
     width: 80%;
     margin-left: 10%;
+    margin-top: 20px;
     border: 1px solid black;
     color: white;
     border-radius: 20px;

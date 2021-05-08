@@ -1,12 +1,35 @@
 <div class="loginContainer">
     <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
         <label for="email">Email</label><br>
-        <input type="email" name="email" id="email" required placeholder="Enter your email">
+        <input type="email" #em=ngModel name="email" id="email" required placeholder="Enter your email" [(ngModel)]="logInInfo.userEmail">
+        <div *ngIf="em.invalid && (em.dirty || em.touched)">
+            <div *ngIf="em.errors.required" class="validation">
+                Email is required
+            </div>
+            <div *ngIf="em.errors.pattern" class="validation">
+                Email is invalid
+            </div>
+        </div>
         <br>
 
         <label for="password">Password</label><br>
-        <input type="password" name="password" id="password" required placeholder="Enter your password">
+        <input type="password" #pwd=ngModel name="password" id="password" required placeholder="Enter your password" [(ngModel)]="logInInfo.password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+        <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
+            <div *ngIf="pwd.errors.required" class="validation">
+                Password is required
+            </div>
+            <div *ngIf="pwd.errors.pattern" class="validation">
+                Password is invalid <br>
+                Password must contain:
+                <li>A uppercase (A)</li>
+                <li>A lowercase (a)</li>
+                <li>A digit (0-9)</li>
+                <li>A special character</li>
+                <li>Minimum length is 8</li>
+            </div>
+        </div>
         <br>
+        <div id="errorDiv" class="validation"></div>
 
         <a [routerLink]="['/forgotPasswordLink']">Forgot Password?</a> <br>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -92,12 +93,31 @@ export class TestComponent implements OnInit {
   questionIndex: number = 0;
   answerMap: Map<Number, String> = new Map();
   score: number = 0;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    //make sure to add guard for back button as after submit u cant go back to test!
+    var deadline = new Date().getTime() + 600000;
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+      var t = deadline - now;
+      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((t % (1000 * 60)) / 1000);
+      try{
+        document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+        if (t < 0) {
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "Time's Up";
+          let answerRadio = document.querySelectorAll(".answer");
+          for (let i = 0; i < answerRadio.length; i++) {
+            (<HTMLInputElement>answerRadio[i]).disabled = true;
+          }
+        }
+      }
+      catch{
 
-    //call TIMER method on page load
-    this.timer();
+      }
+    }, 1000);
 
 
     (<HTMLInputElement>document.getElementById("previousButton")).disabled = true;
@@ -181,12 +201,19 @@ export class TestComponent implements OnInit {
   }
 
   submitTest() {
+
     if (this.questionIndex == 9) {
       this.answerMap[this.questionIndex] = this.getSelectedAnswer();
       console.log(this.answerMap);
     }
 
-    console.log("hi");
+    // console.log("hi");
+    for (var m in this, this.answerMap) {
+      if (this.answerMap[m] == undefined) {
+        this.answerMap[m] = "z";
+      }
+    }
+
     for (var m in this.answerMap) {
       for (var i = 0; i < this.answerMap[m].length; i++) {
         if (this.answerMap[m][i] == this.questions[m].correctanswer) {
@@ -194,9 +221,9 @@ export class TestComponent implements OnInit {
         }
       }
     }
-
-
     console.log(this.score);
+    sessionStorage.setItem("scoreForTest", this.score.toString())
+    this.router.navigate(['/reportLink']);
 
   }
 
@@ -227,25 +254,4 @@ export class TestComponent implements OnInit {
       (<HTMLInputElement>document.getElementById("previousButton")).disabled = false;
     }
   }
-
-
-  //code for timer
-  timer() {
-    var deadline = new Date().getTime() + 600000;
-    var x = setInterval(function () {
-      var now = new Date().getTime();
-      var t = deadline - now;
-      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((t % (1000 * 60)) / 1000);
-      document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-      if (t < 0) {
-        clearInterval(x);
-        document.getElementById("timer").innerHTML = "Time's Up";
-      }
-    }, 1000);
-  }
-
-
-
-  
 }

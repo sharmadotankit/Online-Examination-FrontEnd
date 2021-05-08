@@ -1,38 +1,156 @@
 <div class="formContainer">
-    <form #registrationForm="ngForm" ngSubmit="registerUser(registrationForm)">
+    <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm)">
+
         <label for="fullname">Full Name </label><br>
-        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+        <input type="text" #fn="ngModel" id="fullname" name="fullname" placeholder="Enter your full name"
+            [(ngModel)]=user.userName required pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$">
+        <div *ngIf="fn.invalid &&(fn.touched || fn.dirty)">
+            <div *ngIf="fn.errors.required" class="validation">
+                User Name is required
+            </div>
+            <div *ngIf="fn.errors.pattern" class="validation">
+                User Name is invalid
+            </div>
+        </div>
         <br>
 
         <label for="email">Email</label><br>
-        <input type="text" id="email" name="email" required placeholder="Enter your email">
+        <input type="text" #em="ngModel" id="email" name="email" required placeholder="Enter your email"
+            [(ngModel)]=user.userEmail pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$">
+        <div *ngIf="em.invalid && (em.dirty || em.touched)">
+            <div *ngIf="em.errors.required" class="validation">
+                Email is required
+            </div>
+            <div *ngIf="em.errors.pattern" class="validation">
+                Email is invalid
+            </div>
+        </div>
+        <br>
+
+
+        <label for="pwd">Password</label><br>
+        <input type="password" #pwd="ngModel" id="pwd" name="pwd" required placeholder="Enter your password"
+            [(ngModel)]=user.password pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+        <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)">
+            <div *ngIf="pwd.errors.required" class="validation">
+                Password is required
+            </div>
+            <div *ngIf="pwd.errors.pattern" class="validation">
+                Password is invalid <br>
+                Password must contain:
+                <li>A uppercase (A)</li>
+                <li>A lowercase (a)</li>
+                <li>A digit (0-9)</li>
+                <li>A special character</li>
+                <li>Minimum length is 8</li>
+            </div>
+        </div>
+        <br>
+
+        <label for="cpwd">Confirm Password</label><br>
+        <input type="password" #cpwd="ngModel" id="cpwd" name="cpwd" required placeholder="Confirm your password"
+            [(ngModel)]=confirmPassword pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+        <div *ngIf="cpwd.invalid && (cpwd.dirty || cpwd.touched)">
+            <div *ngIf="cpwd.errors.required" class="validation">
+                Password is required
+            </div>
+            <div *ngIf="cpwd.errors.pattern" class="validation">
+                Password is invalid <br>
+                Password must contain:
+                <li>A uppercase (A)</li>
+                <li>A lowercase (a)</li>
+                <li>A digit (0-9)</li>
+                <li>A special character</li>
+                <li>Minimum length is 8</li>
+            </div>
+        </div>
         <br>
 
         <label for="mobile">Mobile No</label><br>
-        <input type="text" id="mobile" name="mobile" required placeholder="Enter your Mobile number">
+        <input type="text" #mb="ngModel" id="mobile" name="mobile" required placeholder="Enter your Mobile number"
+            [(ngModel)]=user.userMobile pattern="^[6-9]\d{9}$">
+        <div *ngIf="mb.invalid && (mb.dirty || mb.touched)">
+            <div *ngIf="mb.errors.required" class="validation">
+                Mobile No is required
+            </div>
+            <div *ngIf="mb.errors.pattern" class="validation">
+                Mobile No is invalid
+            </div>
+        </div>
         <br>
+
 
         <label for="dob">Date of Birth </label><br>
-        <input type="date" name="dob" id="dob" required placeholder="Choose your date of Birth">
+        <input type="date" #dob="ngModel" name="dob" id="dob" required placeholder="Choose your date of Birth"
+            [(ngModel)]=user.dateOfBirth [max]="getToday()">
+        <div *ngIf="dob.invalid && (dob.dirty || dob.touched)">
+            <div *ngIf="dob.errors.required" class="validation">
+                Date of Birth is required
+            </div>
+        </div>
         <br>
 
+
         <label for="city">City </label><br>
-        <input type="text" name="city" id="city" required placeholder="Enter you city">
+        <input type="text" #ct="ngModel" name="city" id="city" required placeholder="Enter you city"
+            [(ngModel)]=user.userCity pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$">
+        <div *ngIf="ct.invalid && (ct.dirty || ct.touched)">
+            <div *ngIf="ct.errors.required" class="validation">
+                City is required
+            </div>
+            <div *ngIf="ct.errors.pattern" class="validation">
+                City is invalid
+            </div>
+        </div>
+
         <br>
 
         <label for="state">State</label><br>
-        <input type="text" name="state" id="state" required placeholder="Enter you state">
+        <input type="text" #st=ngModel name="state" id="state" required placeholder="Enter you state"
+            [(ngModel)]=user.userState pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$">
+        <div *ngIf="st.invalid && (st.dirty || st.touched)">
+            <div *ngIf="st.errors.required" class="validation">
+                State is required
+            </div>
+            <div *ngIf="st.errors.pattern" class="validation">
+                State is invalid
+            </div>
+        </div>
         <br>
 
         <label for="qualification">Qualification</label><br>
-        <input list="list-buses" type="text" name="qualification" id="qualification" required
-            placeholder="Enter your qualification">
+        <select #qf=ngModel type="text" name="qualification" id="qualification" required
+            [(ngModel)]=user.userQualification>
+            <option value="" disabled selected>Select your option</option>
+            <option>BCA</option>
+            <option>Diploma</option>
+            <option>BCCA</option>
+            <option>BCom</option>
+            <option>BTech</option>
+            <option>BE</option>
+            <option>Other</option>
+        </select>
+
+        <div *ngIf="qf.invalid && (qf.dirty || qf.touched)">
+            <div *ngIf="qf.errors.required" class="validation">
+                Qualification is required
+            </div>
+        </div>
+
         <br>
 
-        <label for="yoc">Year of Completion</label><br>
-        <input type="text" name="yoc" id="yoc" required placeholder="Enter year of completion">
+        <label for="doc">Date of Completion</label><br>
+        <input type="date" #doc=ngModel name="doc" id="doc" #yoc=ngModel required placeholder="Enter year of completion"
+            [(ngModel)]=user.dateOfCompletion [max]="getToday()">
+        <div *ngIf="doc.invalid && (doc.dirty || doc.touched)">
+            <div *ngIf="doc.errors.required" class="validation">
+                Date of completion is required
+            </div>
+        </div>
+        <div id="errorDiv" class="validation"></div>
         <br>
 
+        
         <button type="submit">Register</button>
 
 

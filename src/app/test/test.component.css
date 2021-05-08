@@ -29,11 +29,15 @@
     background-color: rgba(146, 253, 146, 0.794);
     color: rgb(0, 0, 0);
     border-radius: 10px;
-    font-family: 'Orbitron', sans-serif;
     text-align: left;
     letter-spacing: 2px;
     word-spacing: 6px;
     font-weight: bold;
+    font-family: 'Roboto Slab', serif;
+}
+
+h1{
+    font-family: 'Roboto Slab', serif;
 }
 
 

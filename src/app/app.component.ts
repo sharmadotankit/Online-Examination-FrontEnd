@@ -1,5 +1,6 @@
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Main } from 'tsparticles';
 
 
@@ -8,7 +9,19 @@ import { Main } from 'tsparticles';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+    isLoggedIn:boolean=false;
+    loggedInUserId:number=0;
+
+    constructor(private router:Router){}
+
+    ngOnInit(): void {
+        this.loggedInUserId=Number(sessionStorage.getItem("userId"));
+        if(this.loggedInUserId!=0){
+            this.isLoggedIn=true;
+        }
+    }
+
     id = "tsparticles";
     particlesUrl = "http://foo.bar/particles.json";
     particlesOptions = {
@@ -90,11 +103,20 @@ export class AppComponent {
         detectRetina: true
     };
     particlesLoaded(container: Container): void {
-        console.log(container);
+        // console.log(container);
     }
     particlesInit(main: Main): void {
-        console.log(main);
+        // console.log(main);
     }
+
+    logOut(){
+        sessionStorage.clear();
+        this.router.navigate(['/homeLink']).then(()=>{
+            window.location.reload();
+        });
+    }
+
+ 
 }
 
 

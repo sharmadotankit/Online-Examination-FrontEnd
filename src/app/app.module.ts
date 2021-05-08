@@ -14,6 +14,13 @@ import { CoursesComponent } from './courses/courses.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InstructionComponent } from './instruction/instruction.component';
 import { TestComponent } from './test/test.component';
+import { ReportComponent } from './report/report.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { CourseListResolverService } from './resolver/course-list-resolver-service';
+import { EnrollmentListResolverService } from './resolver/enrollmentList-resolver-service';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,9 @@ import { TestComponent } from './test/test.component';
     CoursesComponent,
     InstructionComponent,
     TestComponent,
+    ReportComponent,
+    AdminDashboardComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +44,11 @@ import { TestComponent } from './test/test.component';
     NgParticlesModule,
     FormsModule,
     FlexLayoutModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+  
   ],
-  providers: [],
+  providers: [CourseListResolverService,EnrollmentListResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

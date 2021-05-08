@@ -8,17 +8,24 @@
             <div class="dropdown">
                 <input type="image" src="../assets/login.png" style="height: 30px; width: 30px;" class="dropbtn" />
                 <div class="dropdown-content">
-                    <a [routerLink]="['/registerLink']">Register</a>
-                    <a [routerLink]="['/loginLink']">Login</a>
                     <a [routerLink]="['/courseLink']">Courses</a>
+                    <ng-container *ngIf="!isLoggedIn; else loggedOutBlock">
+                        <a [routerLink]="['/registerLink']">Register</a>
+                        <a [routerLink]="['/loginLink']">Login</a>
+                    </ng-container>
+                    <ng-template #loggedOutBlock >
+                        <a [routerLink]="['/homeLink']" (click)="logOut()" >Log Out</a>
+                    </ng-template>
+                  
                 </div>
             </div>
 
         </li>
         <li class="rightFloat"><a [routerLink]="['/aboutUsLink']">About Us</a></li>
-        <li class="rightFloat"><a [routerLink]="['/homeLink']">Home</a></li>
+        <li class="rightFloat"><a [routerLink]="['/homeLink']" >Home</a></li>
     </ul>
 </div>
+
 <div class="brDiv">
     <br><br><br><br>
 </div>
@@ -39,3 +46,4 @@
         <p class="copyright">Hexadecimal Code © 2021</p>
     </footer>
 </div>
+

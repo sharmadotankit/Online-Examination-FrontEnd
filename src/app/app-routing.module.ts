@@ -2,12 +2,17 @@ import { componentFactoryName } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { InstructionComponent } from './instruction/instruction.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ReportComponent } from './report/report.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CourseListResolverService } from './resolver/course-list-resolver-service';
+import { EnrollmentListResolverService } from './resolver/enrollmentList-resolver-service';
 import { TestComponent } from './test/test.component';
 
 
@@ -31,13 +36,26 @@ const routes: Routes = [
   path:"forgotPasswordLink",component:ForgotPasswordComponent
 },
 {
-  path:"courseLink",component:CoursesComponent
+  path:"courseLink",
+  component:CoursesComponent,
+  resolve: {courseList: CourseListResolverService,
+            enrollmentList: EnrollmentListResolverService}
 },
 {
   path:"instructionLink",component:InstructionComponent
 },
 {
   path:"takeTestLink",component:TestComponent
+},
+{
+  path:"reportLink",component:ReportComponent
+},
+{
+  path:"resetPasswordLInk",component:ResetPasswordComponent
+}
+,
+{
+  path:"adminDashBoardLink",component:AdminDashboardComponent
 }
 ];
 
