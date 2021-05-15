@@ -14,9 +14,7 @@ export class InstructionComponent implements OnInit {
   }
 
   takeTest(){
-    this.router.navigate(['/takeTestLink']).then(()=>{
-      window.location.reload();
-    });
+    this.router.navigate(['/takeTestLink']);
   }
 
 }

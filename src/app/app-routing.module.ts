@@ -13,6 +13,8 @@ import { ReportComponent } from './report/report.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CourseListResolverService } from './resolver/course-list-resolver-service';
 import { EnrollmentListResolverService } from './resolver/enrollmentList-resolver-service';
+import { questionListResoverService } from './resolver/question-list-resolver-service';
+import { ResultResolverService } from './resolver/result-resolver-service';
 import { TestComponent } from './test/test.component';
 
 
@@ -45,10 +47,14 @@ const routes: Routes = [
   path:"instructionLink",component:InstructionComponent
 },
 {
-  path:"takeTestLink",component:TestComponent
+  path:"takeTestLink",
+  component:TestComponent,
+  resolve:{questionList:questionListResoverService}
 },
 {
-  path:"reportLink",component:ReportComponent
+  path:"reportLink",
+  component:ReportComponent,
+  resolve:{report:ResultResolverService}
 },
 {
   path:"resetPasswordLInk",component:ResetPasswordComponent

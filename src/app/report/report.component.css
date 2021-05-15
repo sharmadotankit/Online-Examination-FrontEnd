@@ -6,13 +6,14 @@
 .certificate{
     margin-top: 20px;
     background-color: rgb(255, 247, 234);
+    background-size: 100% 100%;
     width: 80%;
     height: auto;
-    border: 25px solid ;
-    margin-left: 8%;
-    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ABF435' /%3E%3Cstop offset='25%25' stop-color='%232CC5C5' /%3E%3Cstop offset='50%25' stop-color='%232CC5C5' /%3E%3Cstop offset='100%25' stop-color='%23FFB149' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3'/%3E %3C/svg%3E")1;
+    margin: 0% 10%;
     text-align: center;
-
+    padding:10px;
+    padding-left: 20px;
+    letter-spacing: 2px;
 }
 
 
@@ -22,17 +23,21 @@ img{
 
 .logo{
     text-align: center;
-    background-color: rgba(2, 10, 128, 0.808);
-    border:2px solid rgb(189, 182, 154);
-    color: rgb(255, 255, 255);
-    width: 50px;
-    margin: 40px;
-    border-radius: 500px;
-    padding: 30px;
+    background-color: rgba(212, 242, 251, 0.787);
+    border:1px solid #46daf8;
+    color: rgb(78, 5, 5);
+    width: 55px;
+    margin: 20px;
+    border-radius: 1500px;
+    padding: 18px;
     letter-spacing: 3px;
-    
+    margin-left: 80%;
 }
 
+
+.logo h2{
+    margin-top: 10px;
+}
 
 
 button{
@@ -49,7 +54,7 @@ button{
 }
 
 button:hover{
-    transform: scale(1.2);
+    transform: scale(1.05);
 }
 
 p{
@@ -59,15 +64,85 @@ p{
 
 .failDiv{
     margin-top: 20px;
-    background-color: rgba(245, 172, 56, 0.417);
+    background-color: rgb(255, 227, 181);
     width: 80%;
     height: auto;
-    border: 1px solid black;
+    border: 2px solid black;
     margin-left: 8%;
     text-align: center;
-    color: white;
-    font-family: 'Orbitron', sans-serif;
+    color: rgb(39, 9, 9);
     letter-spacing: 3px;
     word-spacing: 5px;
     border-radius: 20px;
+    padding: 20px;
+    border-style: outset;
+}
+
+.failDiv h1{
+    font-family: 'Fredoka One', cursive;
+    color: rgb(151, 0, 0);
+}
+
+
+.failDiv h4{
+    font-family: 'Fredoka One', cursive;
+    font-size: larger;
+    color: blue;
+}
+
+/* css for modal */
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    border-radius: 10px;
+    background-color: #e2e2e2;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 5px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    color: brown;
+    font-size: 1.3em;
+    
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+  
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+.modal a{
+    font-weight: bold;
+    color: darkblue;
+    text-decoration: none;
+}
+
+
+.modal p{
+    margin: 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: large;
 }

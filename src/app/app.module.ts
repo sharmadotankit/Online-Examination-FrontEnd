@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseListResolverService } from './resolver/course-list-resolver-service';
 import { EnrollmentListResolverService } from './resolver/enrollmentList-resolver-service';
+import { questionListResoverService } from './resolver/question-list-resolver-service';
+import { ResultResolverService } from './resolver/result-resolver-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,12 @@ import { EnrollmentListResolverService } from './resolver/enrollmentList-resolve
     HttpClientModule,
   
   ],
-  providers: [CourseListResolverService,EnrollmentListResolverService],
+  providers: [
+    CourseListResolverService,
+    EnrollmentListResolverService,
+    questionListResoverService,
+    ResultResolverService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

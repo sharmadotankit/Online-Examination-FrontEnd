@@ -1,37 +1,43 @@
 <div class="mainReportDiv">
     <ng-container *ngIf="isPass; else failBlock">
         <div id="printCertificate">
-            <div class="certificate">
-                <img src="assets/certificate_logo.png">
-                <h1 style="font-family: algerian; color: rgb(0, 95, 139);">Certificate for Completion</h1>
-                <p>This is to certify that</p>
-                <h1>Ankit Sharma</h1>
-                <p>has cleared the level 1 of Javascript Course with 90%.</p>
-                <p>Date : 05-04-1999</p>
+            <div class="certificate" style="background-image: url('assets/certificate_background.png'); ">
                 <br><br>
-                <div style="float: right; margin-right: 40px;">
-                    <p>Valid Through: </p>
-                    <p>04-04-2000</p>
-                </div>
+                <img src="assets/certificate_logo.png">
+                <br><br>
+                <h1 style="font-family: algerian; color: rgb(0, 95, 139);">Certificate for Completion</h1>
+                <br>
+                <p>This is to certify that</p>
+                <h1>{{this.reportOfUser.enrollment.user.userName}}</h1>
+                <p>has cleared the level {{this.reportOfUser.enrollment.levelOfUser}} of {{this.reportOfUser.enrollment.course.courseName}} Course with {{this.reportOfUser.score}}%.</p>
+                <br>
                 <div class="logo" >
                     <h2>HDC</h2>
-                </div>
-               
+                </div> 
             </div>
         </div>
-        <button > Download Certificate</button>
-        <button>Proceed for next level</button>
+        <button (click)="printCertificate()"> Download Certificate</button>
+        <button (click)="goForNextLevel()">Proceed for next level</button>
     </ng-container>
 
 
     <ng-template #failBlock>
         <div class="failDiv">
-            <h1>You failed to clear the test</h1>
-            <h4>Name: Ankit Sharma </h4>
-            <h4>Score: 45%</h4>
-            <h4>Level : 1</h4>
+            <h1>You failed to clear the test :( </h1>
+            <br><br>
+            <h4>Name: {{this.reportOfUser.enrollment.user.userName}}</h4>
+            <h4>Score: {{this.reportOfUser.score}}%</h4>
+            <h4>Level : {{this.reportOfUser.enrollment.levelOfUser}}</h4>
             
         </div>
-        <button> Click here to Retry </button>
+        <button (click)="goBackToTestForSameExam()"> Click here to Retry </button>
     </ng-template>
+</div>
+
+<div id="testClear" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <p>Seems you have clear all level of this course. Time to master other courses!</p>
+        <p>GET->SET-> <a  [routerLink]="['/courseLink']">GO!!!!</a> </p>
+    </div>
 </div>

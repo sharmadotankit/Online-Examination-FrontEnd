@@ -8,6 +8,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
+
 }
 
 
@@ -92,11 +93,70 @@ h4{
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    top: 105%;
-    left: 0%;
+    top: 100%;
+    left: 100%;
   }
   
   /* Show the tooltip text when you mouse over the tooltip container */
   .tooltip:hover:disabled .tooltiptext  {
     visibility: visible;
   }
+
+
+
+
+  /* css for modal */
+  /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    font-family: 'Fredoka One', cursive;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    border-radius: 10px;
+    background-color: #e2e2e2;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 5px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    color: brown;
+    font-size: 1.3em;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+  
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+.modal a{
+    font-weight: bold;
+    color: darkblue;
+    text-decoration: none;
+}
+
+
+.modal p{
+    margin: 20px;
+
+}

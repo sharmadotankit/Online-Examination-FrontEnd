@@ -1,5 +1,11 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Question } from '../Model/Question';
+import { Report } from '../Model/Report';
+import { Status } from '../Model/Status';
+import { UserService } from '../Service/user.service';
+
 
 @Component({
   selector: 'app-test',
@@ -7,106 +13,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  questions = [
-    {
-      question: "Who invented javascript?",
-      a: "Douglas crockford",
-      b: "Sheryl Sandberg",
-      c: "Brendan Eich",
-      d: "Rasmus Lurdorf",
-      correctanswer: "c",
-    },
-    {
-      question: "Which one of these is a JavaScript package manager?",
-      a: "Node.js",
-      b: "npm",
-      c: "typescript",
-      d: "js",
-      correctanswer: "b",
-    },
-    {
-      question: "Which tool can you use to ensure code quality?",
-      a: "ESLint",
-      b: "Angular",
-      c: "jQuery",
-      d: "React",
-      correctanswer: "a",
-    },
-    {
-      question: "JavaScript is a ______-side programming language?",
-      a: "client",
-      b: "Server",
-      c: "both",
-      d: "none",
-      correctanswer: "a",
-    },
-    {
-      question: "Which built-in method calls a function for each element in the array?",
-      a: "while()",
-      b: "loop()",
-      c: "forEach()",
-      d: "none",
-      correctanswer: "c",
-    },
-    {
-      question: "Which of the following is the correct syntax to print a page using JavaScript?",
-      a: "window.print()",
-      b: "browser.print()",
-      c: "navigator.print()",
-      d: "none",
-      correctanswer: "a",
-    },
-    {
-      question: "What is the HTML tag under which one can write the JavaScript code?",
-      a: "<javascript>",
-      b: "<scripted>",
-      c: "<script>",
-      d: "<js>",
-      correctanswer: "c",
-    },
-    {
-      question: "What is the correct file extension for Javascript files?",
-      a: ".java",
-      b: ".js",
-      c: ".javascript",
-      d: ".script",
-      correctanswer: "b",
-    },
-    {
-      question: "JavaScript language is _____ language.",
-      a: "Object-Oriented",
-      b: "Object-Based",
-      c: "Assembly",
-      d: "High-level",
-      correctanswer: "b",
-    },
-    {
-      question: "Who invented javascript?",
-      a: "Douglas crockford",
-      b: "Sheryl Sandberg",
-      c: "Brendan Eich",
-      d: "Guido van Rossum",
-      correctanswer: "c",
-    },
-  ];
-
+  questions:Question[]=[];
+  report:Report= new Report();
   questionIndex: number = 0;
   answerMap: Map<Number, String> = new Map();
   score: number = 0;
-  constructor(private router: Router) { }
+  percentage: number = 0;
+  x:any;
 
+  constructor(private router: Router,private activatedRoute:ActivatedRoute,private userService:UserService,private locationStrategy: LocationStrategy) {
+    this.questions = this.activatedRoute.snapshot.data["questionList"];
+   }
+  
+ 
   ngOnInit(): void {
+    
     //make sure to add guard for back button as after submit u cant go back to test!
     var deadline = new Date().getTime() + 600000;
-    var x = setInterval(function () {
+     this.x = setInterval(function () {
       var now = new Date().getTime();
       var t = deadline - now;
       var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((t % (1000 * 60)) / 1000);
-      try{
+      try {
         document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
         if (t < 0) {
-          clearInterval(x);
+          clearInterval(this.x);
           document.getElementById("timer").innerHTML = "Time's Up";
           let answerRadio = document.querySelectorAll(".answer");
           for (let i = 0; i < answerRadio.length; i++) {
@@ -114,7 +46,7 @@ export class TestComponent implements OnInit {
           }
         }
       }
-      catch{
+      catch {
 
       }
     }, 1000);
@@ -128,11 +60,11 @@ export class TestComponent implements OnInit {
     const option3 = document.getElementById("option3");
     const option4 = document.getElementById("option4");
 
-    questionText.innerText = (this.questionIndex + 1) + ". " + this.questions[0].question;
-    option1.innerText = this.questions[0].a;
-    option2.innerText = this.questions[0].b;
-    option3.innerText = this.questions[0].c;
-    option4.innerText = this.questions[0].d;
+    questionText.innerText = (this.questionIndex + 1) + ". " + this.questions[0].questionText;
+    option1.innerText = this.questions[0].option1;
+    option2.innerText = this.questions[0].option2;
+    option3.innerText = this.questions[0].option3;
+    option4.innerText = this.questions[0].option4;
 
   }
 
@@ -202,6 +134,8 @@ export class TestComponent implements OnInit {
 
   submitTest() {
 
+    clearInterval(this.x);
+
     if (this.questionIndex == 9) {
       this.answerMap[this.questionIndex] = this.getSelectedAnswer();
       console.log(this.answerMap);
@@ -216,13 +150,25 @@ export class TestComponent implements OnInit {
 
     for (var m in this.answerMap) {
       for (var i = 0; i < this.answerMap[m].length; i++) {
-        if (this.answerMap[m][i] == this.questions[m].correctanswer) {
+        if (this.answerMap[m][i] == this.questions[m].correctOption) {
           this.score++;
         }
       }
     }
-    console.log(this.score);
-    sessionStorage.setItem("scoreForTest", this.score.toString())
+
+    this.percentage = (this.score / this.questions.length) * 100;
+
+    this.report.enrollment=JSON.parse(sessionStorage.getItem("enrollmentOfUserForCourse"));
+    this.report.score=this.percentage;
+    if(this.percentage>70){
+      this.report.status=Status.PASSED;
+    }
+    else{
+      this.report.status=Status.FAILED;
+    }
+   sessionStorage.setItem("generatedReport",JSON.stringify(this.report));
+    console.log(JSON.stringify(this.report))
+    
     this.router.navigate(['/reportLink']);
 
   }
@@ -234,11 +180,11 @@ export class TestComponent implements OnInit {
     const option3 = document.getElementById("option3");
     const option4 = document.getElementById("option4");
 
-    questionText.innerText = (n + 1) + ". " + this.questions[n].question;
-    option1.innerText = this.questions[n].a;
-    option2.innerText = this.questions[n].b;
-    option3.innerText = this.questions[n].c;
-    option4.innerText = this.questions[n].d;
+    questionText.innerText = (n + 1) + ". " + this.questions[n].questionText;
+    option1.innerText = this.questions[n].option1;
+    option2.innerText = this.questions[n].option2;
+    option3.innerText = this.questions[n].option3;
+    option4.innerText = this.questions[n].option4;
 
     if (this.questionIndex == 9) {
       (<HTMLInputElement>document.getElementById("nextButton")).disabled = true;
