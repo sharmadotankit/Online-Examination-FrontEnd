@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Model/User';
 import { Observable } from 'rxjs';
 import { LogInDto } from '../Model/LogInDto';
@@ -7,7 +7,8 @@ import { Course } from '../Model/Course';
 import { Enrollment } from '../Model/Enrollment';
 import { Question } from '../Model/Question';
 import { Report } from '../Model/Report';
-import { EnrollmentListResolverService } from '../resolver/enrollmentList-resolver-service';
+import { ResetPasswordDto } from '../Model/ResetPasswordDto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,13 @@ export class UserService {
 
   updateLevelOfAUser(enrollment:Enrollment):Observable<Enrollment>{
     return this.httpClient.put<Enrollment>("http://localhost:9090/updatelevelofuser",enrollment);
+  }
+
+  sendMailForResetPassword(email:string):Observable<boolean>{
+    return this.httpClient.post<boolean>("http://localhost:9090/sendmailforresetpassword?emailOfUser="+email,null);
+  }
+
+  resetPassword(resetPasswordDto:ResetPasswordDto):Observable<string>{
+    return this.httpClient.post<string>("http://localhost:9090/resetpassword",resetPasswordDto, { responseType: 'text' as 'json'});
   }
 }

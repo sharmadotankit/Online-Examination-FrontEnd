@@ -64,7 +64,7 @@ button{
 }
 
 button:hover{
-    transform: scale(1.2);
+    transform: scale(1.05);
 }
 
 .tabs{
@@ -132,4 +132,62 @@ li{
 
 h2{
     font-family: 'Orbitron', sans-serif;
+}
+
+table{
+    width: 100%;
+    background-color: rgba(155, 47, 0, 0.699);
+    font-family: 'Fredoka One', cursive;
+    margin: 0px;
+    table-layout: fixed;
+    width: 100%; 
+    word-wrap: break-word;  
+}
+
+th{
+    font-size: larger;
+    color: rgb(193, 255, 255);
+    letter-spacing: 2px;
+    word-spacing: 4px;
+}
+
+.btnInTable{
+   width: 80%;
+   height: 50%;
+   padding: 3px;
+   margin: 0px;
+
+}
+
+
+.filterReports{
+    width: 40%;
+    text-align: center;
+    background-color: rgb(110, 63, 0);
+    margin-left: 30%;
+    margin-bottom: 10px;
+    color: white;
+    padding: 10px;
+    border: 1px solid steelblue;
+    border-radius: 3px;
+}
+
+.filterReports input{
+    width: 200px;
+}
+
+#removeQuestionDiv input{
+    width: 270px;
+}
+
+
+textarea{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 4px 10px;
+    background-color: rgba(236, 242, 255, 0.904);
+    color: rgb(0, 77, 91);
+    width: 52%;
+    border-radius: 5px;
+    border: 1px solid transparent;
 }

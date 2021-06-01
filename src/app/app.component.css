@@ -9,6 +9,7 @@ ul{
     list-style-type: none;
     margin: 10px;
     padding: 0;
+    height: auto;
 }
 
 ul .rightFloat{
@@ -29,7 +30,6 @@ ul .rightFloat{
     color: azure;
     transition: transform .2s;
     letter-spacing: 3px;
-
 }
 
 .rightFloat:hover{
@@ -40,6 +40,7 @@ ul .rightFloat{
 .leftFloat{
     float: left;
     margin: 0;
+    width: 50%;
 }
 
 /* footer Css */

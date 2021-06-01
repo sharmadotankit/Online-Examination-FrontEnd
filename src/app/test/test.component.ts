@@ -159,15 +159,22 @@ export class TestComponent implements OnInit {
     this.percentage = (this.score / this.questions.length) * 100;
 
     this.report.enrollment=JSON.parse(sessionStorage.getItem("enrollmentOfUserForCourse"));
+    // console.log(this.report.enrollment);
     this.report.score=this.percentage;
-    if(this.percentage>70){
+   
+    if(this.percentage>=70){
       this.report.status=Status.PASSED;
+      this.report.levelPassed=this.report.enrollment.levelOfUser+1;
     }
     else{
       this.report.status=Status.FAILED;
+      this.report.levelPassed=this.report.enrollment.levelOfUser;
     }
+
    sessionStorage.setItem("generatedReport",JSON.stringify(this.report));
-    console.log(JSON.stringify(this.report))
+    console.log(this.report);
+    // console.log("This is level passed "+this.report.levelPassed);
+    // console.log("This is level of user "+this.report.enrollment.levelOfUser);
     
     this.router.navigate(['/reportLink']);
 

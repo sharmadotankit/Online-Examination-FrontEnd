@@ -51,7 +51,9 @@ export class ReportComponent implements OnInit {
   }
 
   goBackToTestForSameExam(){
-    this.router.navigate(["takeTestLink"]);
+    this.router.navigate(["takeTestLink"]).then(()=>{
+      window.location.reload();
+    });
   }
 
   goForNextLevel(){
@@ -72,7 +74,9 @@ export class ReportComponent implements OnInit {
         }
       );
   
-      this.router.navigate(["instructionLink"]);
+      this.router.navigate(["instructionLink"]).then(()=>{
+        window.location.reload();
+      });
     }
     
   }

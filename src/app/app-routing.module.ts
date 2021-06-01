@@ -62,7 +62,7 @@ const routes: Routes = [
 ,
 {
   path:"adminDashBoardLink",component:AdminDashboardComponent
-}
+},
 ];
 
 @NgModule({

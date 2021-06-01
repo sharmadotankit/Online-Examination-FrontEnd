@@ -6,4 +6,5 @@ export class Report{
     score:number;
     status:Status;
     enrollment:Enrollment;
+    levelPassed:number;
 }
