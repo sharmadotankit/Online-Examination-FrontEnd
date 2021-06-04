@@ -47,6 +47,11 @@ button:hover{
     transform: scale(1.2);
 }
 
+button:active{
+    background-color: rgba(0, 163, 41, 0.925);
+    transform: translateY(2px);
+}
+
 .validation{
     color: rgb(125, 0, 0);
     font-family: 'Fredoka One', cursive;

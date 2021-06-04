@@ -55,12 +55,14 @@ export class TestComponent implements OnInit {
     (<HTMLInputElement>document.getElementById("previousButton")).disabled = true;
     //code to load first question on page load
     const questionText = document.getElementById("question");
+    const questionNumber = document.getElementById("questionNumber");
     const option1 = document.getElementById("option1");
     const option2 = document.getElementById("option2");
     const option3 = document.getElementById("option3");
     const option4 = document.getElementById("option4");
 
-    questionText.innerText = (this.questionIndex + 1) + ". " + this.questions[0].questionText;
+    questionNumber.innerText="Question "+(this.questionIndex+1)+" : ";
+    questionText.innerText =this.questions[0].questionText;
     option1.innerText = this.questions[0].option1;
     option2.innerText = this.questions[0].option2;
     option3.innerText = this.questions[0].option3;
@@ -182,12 +184,14 @@ export class TestComponent implements OnInit {
 
   loadQuestion(n: number) {
     const questionText = document.getElementById("question");
+    const questionNumber = document.getElementById("questionNumber");
     const option1 = document.getElementById("option1");
     const option2 = document.getElementById("option2");
     const option3 = document.getElementById("option3");
     const option4 = document.getElementById("option4");
 
-    questionText.innerText = (n + 1) + ". " + this.questions[n].questionText;
+    questionNumber.innerText="Question "+(this.questionIndex+1)+" : ";
+    questionText.innerText =this.questions[n].questionText;
     option1.innerText = this.questions[n].option1;
     option2.innerText = this.questions[n].option2;
     option3.innerText = this.questions[n].option3;

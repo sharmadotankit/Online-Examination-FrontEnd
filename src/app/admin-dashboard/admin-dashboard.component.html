@@ -1,7 +1,8 @@
 <div class="mainContainer">
     <div class="tabs">
         <button class="tabLinks" id="addQuestionBtn" (click)="showDiv('addQuestionDiv')">Add Question</button><br>
-        <button class="tabLinks" id="removeQuestionBtn" (click)="showDiv('removeQuestionDiv')" (click)="clearOldQuestion()">Remove
+        <button class="tabLinks" id="removeQuestionBtn" (click)="showDiv('removeQuestionDiv')"
+            (click)="clearOldQuestion()">Remove
             Question</button><br>
         <button class="tabLinks" id="viewReportsBtn" (click)="showDiv('viewReportDiv')" (click)="viewAllReports()">View
             Reports</button><br>
@@ -23,61 +24,134 @@
 
             <div id="addQuestionDiv">
                 <h2>Add questions</h2>
+                <form #addQuestionForm="ngForm" (ngSubmit)="addQuestion()">
+                    <label for="course">Enter the course </label><br>
+                    <input #cr="ngModel" type="text" id="course" name="course" required placeholder="Enter the course"
+                        pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" [(ngModel)]="courseNameToFilter">
+                    <div *ngIf="cr.invalid && (cr.dirty || cr.touched)">
+                        <div *ngIf="cr.errors.required" class="validation">
+                            Course is required
+                        </div>
+                        <div *ngIf="cr.errors.pattern" class="validation">
+                            Course Name is invalid
+                        </div>
+                    </div>
+                    <br>
 
-                <label for="course">Enter the course </label><br>
-                <input type="text" id="course" name="course" [(ngModel)]="courseNameToFilter"> 
-                <br>
+                    <label for="level">Enter level</label><br>
+                    <input #lou="ngModel" type="text" id="level" required pattern="[1-3]" name="level"
+                        [(ngModel)]="levelToFilter" placeholder="Enter level">
 
-                <label for="level">Enter level</label><br>
-                <input type="number" id="level" name="level" [(ngModel)]="levelToFilter">
-                <br>
+                    <div *ngIf="lou.invalid &&(lou.dirty|| lou.touched)">
+                        <div *ngIf="lou.errors.required" class="validation">
+                            Level is required
+                        </div>
+                        <div *ngIf="lou.errors.pattern" class="validation">
+                            Enter level between 1-3
+                        </div>
+                    </div>
+                    <br>
 
-
-                <div class="questionInputDiv">
                     <label for="questionText"> Enter the question</label><br>
-                    <textarea name="questionText" id="questionText" rows="4" cols="50" [(ngModel)]="addQuestionObj.questionText"></textarea>
+                    <textarea #qt="ngModel" name="questionText" id="questionText" rows="4" cols="50"
+                        [(ngModel)]="addQuestionObj.questionText" required placeholder="Enter the question"></textarea>
+                    <div *ngIf="qt.invalid && (qt.touched || qt.dirty)">
+                        <div *ngIf="qt.errors.required" class="validation">
+                            Question is required
+                        </div>
+                    </div>
                     <br>
 
-                    <label for="option1"> Enter the option a</label><br>
-                    <input type="text" name="option1" id="option1"  [(ngModel)]="addQuestionObj.option1">
+                    <label for="option1"> Enter the option a </label><br>
+                    <input #op1=ngModel required type="text" name="option1" id="option1"
+                        [(ngModel)]="addQuestionObj.option1" placeholder="Enter option a">
+                    <div *ngIf="op1.invalid && (op1.dirty|| op1.touched)">
+                        <div *ngIf="op1.errors.required" class="validation">
+                            Option a is required
+                        </div>
+                    </div>
                     <br>
+
 
                     <label for="option2"> Enter the option b</label><br>
-                    <input type="text" name="option2" id="option2"  [(ngModel)]="addQuestionObj.option2">
+                    <input #op2=ngModel required type="text" name="option2" id="option2" placeholder="Enter option b"
+                        [(ngModel)]="addQuestionObj.option2">
+                    <div *ngIf="op2.invalid &&(op2.dirty || op2.touched)">
+                        <div *ngIf="op2.errors.required" class="validation">
+                            Option b is required
+                        </div>
+                    </div>
                     <br>
 
                     <label for="option3"> Enter the option c</label><br>
-                    <input type="text" name="option3" id="option3" [(ngModel)]="addQuestionObj.option3">
+                    <input #op3=ngModel required type="text" name="option3" id="option3" placeholder="Enter option c"
+                        [(ngModel)]="addQuestionObj.option3">
+                    <div *ngIf="op3.invalid &&(op3.dirty||op3.touched)">
+                        <div ngIf="op3.errors.required" class="validation">
+                            Option c is required
+                        </div>
+                    </div>
                     <br>
-
 
                     <label for="option4"> Enter the option d</label><br>
-                    <input type="text" name="option4" id="option4" [(ngModel)]="addQuestionObj.option4">
+                    <input #op4=ngModel required type="text" name="option4" id="option4" placeholder="Enter option d"
+                        [(ngModel)]="addQuestionObj.option4">
+                    <div *ngIf="op4.invalid && (op4.dirty||op4.touched)" class="validation">
+                        <div *ngIf="op4.errors.required">
+                            Option d is required
+                        </div>
+                    </div>
                     <br>
-
 
                     <label for="correctAns"> Correct option (a,b,c,d) </label><br>
-                    <input type="text" name="correctAns" id="correctAns" [(ngModel)]="addQuestionObj.correctOption">
+                    <input #co=ngModel required type="text" name="correctAns" id="correctAns" pattern="[a-d]{1}"
+                        placeholder="Enter option correct option (a,b,c,d)" [(ngModel)]="addQuestionObj.correctOption">
+                    <div *ngIf="co.invalid && (co.dirty || co.touched)" class="validation">
+                        <div *ngIf="co.errors.required">
+                            Correct option is required
+                        </div>
+                        <div *ngIf="co.errors.pattern">
+                            Correct option can only be one of the following: a,b,c,d.
+                        </div>
+                    </div>
                     <br>
 
-                    <button (click)="addQuestion()">Add Question</button>
+                    <button type="submit">Add Question</button>
 
                     <div id="resultDivAdd"></div>
-                </div>
+                </form>
             </div>
 
 
             <div id="removeQuestionDiv">
                 <h2>Remove questions</h2>
-                <label for="subject">Enter course</label><br>
-                <input type="text" id="subject" name="subject" [(ngModel)]="courseNameToFilter">
-                <br>
+                <form #removeQuestionForm=ngForm (ngSubmit)="findQuestion()">
+                    <label for="subject">Enter course</label><br>
+                    <input #sub=ngModel type="text" id="subject" name="subject" required placeholder="Enter course name"
+                        [(ngModel)]="courseNameToFilter">
+                    <div *ngIf="sub.invalid &&(sub.dirty || sub.touched)">
+                        <div *ngIf="sub.errors.required" class="validation">
+                            Course name is required
+                        </div>
+                    </div>
+                    <br>
 
-                <label for="level"> Enter level </label><br>
-                <input type="number" id="level" name="level" [(ngModel)]="levelToFilter">
-                <br>
+                    <label for="level"> Enter level </label><br>
+                    <input type="text" #lvloc="ngModel" required pattern="[1-3]{1}" placeholder="Enter level of course"
+                        id="level" name="level" [(ngModel)]="levelToFilter">
+                    <div *ngIf="lvloc.invalid && (lvloc.dirty || lvloc.touched)">
+                        <div *ngIf="lvloc.errors.required" class="validation">
+                            Level is required
+                        </div>
+                        <div *ngIf="lvloc.errors.pattern" class="validation">
+                            Enter level between 1-3
+                        </div>
+                    </div>
+                    <br>
 
-                <button (click)="findQuestion()">Find Questions</button>
+                    <button type="submit">Find Questions</button>
+
+                </form>
 
                 <div id="resultDiv"></div>
 
@@ -101,7 +175,8 @@
                                 <td>{{question.option3}}</td>
                                 <td>{{question.option4}}</td>
                                 <td>{{question.correctOption}}</td>
-                                <td><button class="btnInTable" (click)="removeQuestion(question.questionId)">Remove</button></td>
+                                <td><button class="btnInTable"
+                                        (click)="removeQuestion(question.questionId)">Remove</button></td>
                             </tr>
                         </ng-container>
                     </table>
@@ -115,24 +190,27 @@
             <div id="viewReportDiv">
                 <h2>All Reports</h2>
                 <div class="filterReports">
-                    <label for="filterCourseName">Enter Course Name</label><br>
-                    <input type="text" id="filterCourseName" name="filterCourseName" [(ngModel)]="courseNameToFilter">
-                    <br>
+                    <form #showReportForm="ngForm" (ngSubmit)="filterReportsByCondition()">
+                        <label for="filterCourseName">Enter Course Name</label><br>
+                        <input type="text" id="filterCourseName" name="filterCourseName"
+                            [(ngModel)]="courseNameToFilter">
+                        <br>
 
-                    <label for="level">Enter level</label><br>
-                    <input type="number" name="level" id="level" [(ngModel)]="levelToFilter">
-                    <br>
+                        <label for="level">Enter level</label><br>
+                        <input type="number" name="level" id="level" [(ngModel)]="levelToFilter">
+                        <br>
 
-                    <label for="status">Select Status : </label>
-                    <select name="status" id="status" [(ngModel)]="statusToFilter">
-                        <option value="PASSED">PASSED</option>
-                        <option value="FAILED">FAILED</option>
-                    </select>
+                        <label for="status">Select Status : </label>
+                        <select name="status" id="status" [(ngModel)]="statusToFilter">
+                            <option value="PASSED">PASSED</option>
+                            <option value="FAILED">FAILED</option>
+                        </select>
 
-                    <div id="errorDiv"></div>
+                        <div id="errorDiv"></div>
 
-                    <br>
-                    <button (click)="filterReportsByCondition()">Filter Reports</button>
+                        <br>
+                        <button type="submit">Filter Reports</button>
+                    </form>
                 </div>
 
                 <table border="1">

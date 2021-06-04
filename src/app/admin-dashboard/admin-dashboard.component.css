@@ -22,10 +22,14 @@ input{
     margin-bottom: 20px;
     padding: 4px 10px;
     background-color: rgba(236, 242, 255, 0.904);
-    color: rgb(0, 77, 91);
+    color: rgb(6, 24, 27);
     width: 52%;
     border-radius: 5px;
     border: 1px solid transparent;
+    text-align: center;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-weight: bold;
 }
 
 select{
@@ -67,6 +71,11 @@ button:hover{
     transform: scale(1.05);
 }
 
+button:active{
+    background-color: rgba(0, 163, 41, 0.925);
+    transform: translateY(2px);
+}
+
 .tabs{
     float: left;
     width: 20%;
@@ -89,6 +98,10 @@ button:hover{
 
 .tabs>button:hover{
     transform: scale(1.01);
+}
+
+.tabs>button:active{
+    transform:translateY(2px);
 }
 
 #addQuestionDiv, #removeQuestionDiv, #viewReportDiv{
@@ -156,7 +169,6 @@ th{
    height: 50%;
    padding: 3px;
    margin: 0px;
-
 }
 
 
@@ -190,4 +202,16 @@ textarea{
     width: 52%;
     border-radius: 5px;
     border: 1px solid transparent;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+
+.validation{
+    color: rgb(255, 174, 174);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1em;
+    letter-spacing: 2px;
 }

@@ -30,10 +30,9 @@
     color: rgb(0, 0, 0);
     border-radius: 10px;
     text-align: left;
-    letter-spacing: 2px;
-    word-spacing: 6px;
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
+    overflow-wrap: break-word;
 }
 
 h1{
@@ -64,4 +63,10 @@ button:hover{
 button:disabled{
     background-color: rgba(57, 56, 71, 0.678);
     transform: scale(1.0);
+}
+
+
+button:active{
+    background-color: rgba(0, 124, 182, 0.739);
+    transform: translateY(2px);
 }
